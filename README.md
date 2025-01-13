@@ -12,9 +12,4 @@ Este proyecto es una aplicación CLI escrita en Rust para gestionar una librerí
 
 - [Rust](https://www.rust-lang.org/tools/install)
 
-## Instalación
 
-```bash
-git clone https://github.com/tu_usuario/libreria-cli.git
-cd libreria-cli
-cargo build --release
