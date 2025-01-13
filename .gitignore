@@ -1,0 +1,24 @@
+# Ignorar compilaciones y artefactos de Rust
+/target/
+**/*.rs.bk
+*.lock
+Cargo.lock
+
+# Archivos temporales de editores
+*.swp
+*.swo
+*.bak
+*.tmp
+*.old
+*~
+.idea/
+.vscode/
+
+# Configuraciones del sistema
+.DS_Store
+Thumbs.db
+*.log
+
+# Archivos de bases de datos
+/data/libreria.db
+
