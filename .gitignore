@@ -3,6 +3,8 @@
 **/*.rs.bk
 *.lock
 Cargo.lock
+debug/
+**/*.rs.bk
 
 # Archivos temporales de editores
 *.swp
@@ -13,6 +15,7 @@ Cargo.lock
 *~
 .idea/
 .vscode/
+*.pdb
 
 # Configuraciones del sistema
 .DS_Store
