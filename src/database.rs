@@ -1,4 +1,4 @@
-use rusqlite::{params, Connection, Result};
+use rusqlite::{params, Connection, Result, ToSql};
 use std::fs;
 
 use crate::models::Libro;
@@ -43,7 +43,7 @@ pub fn instert_book(conn: &Connection, libro: &Libro) -> Result<()>{
 }
 
 //listar libros
-pub fn list_books(conn: &Connection) -> Vec<Libro>{
+pub fn list_books(conn: &Connection) -> Vec<Libro> {
     let mut stmt = conn.prepare(
         "SELECT id, titulo, autor, paginas, genero, estado, fecha_inicio, fecha_final FROM libros"
     ).expect("Error al consultar");
@@ -72,6 +72,13 @@ pub fn list_books(conn: &Connection) -> Vec<Libro>{
 
 pub fn delete_book(conn: &Connection, id: i32) -> Result<()>{
     conn.execute("DELETE FROM libros WHERE id = ?1", [id])?;
+    Ok(())
+}
+
+pub fn update_book<T: ToSql>(conn: &Connection, campo:&str, nuevo_valor: T, id: i32 ) -> Result<()> {
+    let sql = format!("UPDATE libros SET {} = ?1 WHERE id = ?2", campo);
+    conn.execute(&sql, params![nuevo_valor, id])?;
+
     Ok(())
 }
 

@@ -1,4 +1,4 @@
-use cli::{agregar_libro, eliminar_libro, listar_libros, mostrar_menu};
+use cli::{actualizar_libro, agregar_libro, eliminar_libro, listar_libros, mostrar_menu};
 use database::initialize_db;
 
 mod database;
@@ -26,6 +26,10 @@ fn main(){
             "Eliminar libro" => {
                 println!("Eliminando un libro...");
                 eliminar_libro();
+            }
+            "Actualizar libro" =>{
+                println!("Actualizando libro...");
+                actualizar_libro();
             }
             "Salir" => {
                 println!("Saliendo...");
