@@ -1,6 +1,6 @@
-use serde::{Serialize, Deserialize};
+use serde::{Deserialize, Serialize};
 
-#[derive(Debug,Serialize,Deserialize)]
+#[derive(Debug, Serialize, Deserialize)]
 pub struct Libro {
     pub id: i32,
     pub titulo: String,
@@ -10,5 +10,4 @@ pub struct Libro {
     pub estado: String,
     pub fecha_inicio: String,
     pub fecha_final: String,
-
 }

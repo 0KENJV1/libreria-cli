@@ -51,9 +51,9 @@
 //     }
 // }
 
-use inquire::{Select, Text, CustomType};
 use crate::database::{delete_book, initialize_db, instert_book, list_books, update_book};
 use crate::models::Libro;
+use inquire::{CustomType, Select, Text};
 
 //mostrar menu
 pub fn mostrar_menu() -> String {
@@ -73,7 +73,7 @@ pub fn mostrar_menu() -> String {
 }
 
 //Capturar datos
-pub fn agregar_libro(){
+pub fn agregar_libro() {
     let titulo_variable = Text::new("Introduce el titulo del libro:")
         .prompt()
         .expect("Error al capturar el titulo");
@@ -92,11 +92,11 @@ pub fn agregar_libro(){
 
     let estado_variable = Select::new(
         "Selecciona el estado del libro:",
-        vec!["Nuevo", "En proceso", "Terminado"]
+        vec!["Nuevo", "En proceso", "Terminado"],
     )
-        .prompt()
-        .expect("Error al capturar el estado")
-        .to_string();
+    .prompt()
+    .expect("Error al capturar el estado")
+    .to_string();
 
     let fecha_inicio_variable = Text::new("Introduce la fecha inicio:")
         .prompt()
@@ -116,22 +116,21 @@ pub fn agregar_libro(){
         fecha_inicio: fecha_inicio_variable,
         fecha_final: fecha_final_variable,
     };
-    
-    let conn = initialize_db(). expect("Error");
-    instert_book(&conn, &libro).expect("Error al guardar libro");
 
+    let conn = initialize_db().expect("Error");
+    instert_book(&conn, &libro).expect("Error al guardar libro");
 }
 
-pub fn listar_libros(){
+pub fn listar_libros() {
     let conn = initialize_db().expect("Error");
     let libros = list_books(&conn);
 
-    for libro in libros  {
+    for libro in libros {
         println!("{:#?}", libro);
     }
 }
 
-pub fn eliminar_libro(){
+pub fn eliminar_libro() {
     let conn = initialize_db().expect("Error");
     let id = Text::new("Introduce el id del libro que deseas borrar")
         .prompt()
@@ -142,7 +141,7 @@ pub fn eliminar_libro(){
     delete_book(&conn, id).expect("Error al eliminar el libro");
 }
 
-pub fn actualizar_libro(){
+pub fn actualizar_libro() {
     let id = CustomType::<i32>::new("Introduce el id del libro a actualizar: ")
         .prompt()
         .expect("Error al capturar el id");
@@ -170,7 +169,6 @@ pub fn actualizar_libro(){
                 .expect("Error al capturar titulo");
 
             update_book(&conn, "titulo", &titulo_update, id).expect("Error al actualizar libro");
-
         }
         "Autor" => {
             println!("Actualizando Autor...");
@@ -185,7 +183,6 @@ pub fn actualizar_libro(){
                 .prompt()
                 .expect("Error al capturar numero de paginas");
             update_book(&conn, "paginas", &paginas_update, id).expect("Error al actualizar libro");
-
         }
         "Genero" => {
             println!("Actualizando Genero...");
@@ -206,18 +203,19 @@ pub fn actualizar_libro(){
             let fecha_inicio_update = Text::new("Introduce la nueva fecha inicial: ")
                 .prompt()
                 .expect("Error al capturar fecha inicial");
-            update_book(&conn, "fecha_inicio", &fecha_inicio_update, id).expect("Error al actualizar libro");
+            update_book(&conn, "fecha_inicio", &fecha_inicio_update, id)
+                .expect("Error al actualizar libro");
         }
         "Fecha Final" => {
             println!("Actualizando Fecha Final...");
             let fecha_final_update = Text::new("Introduce la nueva fecha final: ")
                 .prompt()
                 .expect("Error al capturar fecha final");
-            update_book(&conn, "fecha_final", &fecha_final_update, id).expect("Error al actualizar libro");
+            update_book(&conn, "fecha_final", &fecha_final_update, id)
+                .expect("Error al actualizar libro");
         }
         _ => {
             println!("Opcion no valida.");
         }
     }
-
 }

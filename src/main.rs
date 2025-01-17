@@ -1,11 +1,11 @@
 use cli::{actualizar_libro, agregar_libro, eliminar_libro, listar_libros, mostrar_menu};
 use database::initialize_db;
 
-mod database;
 mod cli;
+mod database;
 mod models;
 
-fn main(){
+fn main() {
     //cli::run_cli();
     loop {
         let opcion = mostrar_menu();
@@ -27,7 +27,7 @@ fn main(){
                 println!("Eliminando un libro...");
                 eliminar_libro();
             }
-            "Actualizar libro" =>{
+            "Actualizar libro" => {
                 println!("Actualizando libro...");
                 actualizar_libro();
             }
@@ -35,7 +35,7 @@ fn main(){
                 println!("Saliendo...");
                 break;
             }
-            _ => println!("Opcion no valida")
+            _ => println!("Opcion no valida"),
         }
     }
 }
