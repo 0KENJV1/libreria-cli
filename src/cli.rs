@@ -153,6 +153,7 @@ pub fn actualizar_libro() {
         "Estado",
         "Fecha Inicio",
         "Fecha Final",
+        "Volver",
     ];
     let opciones = Select::new("Elige la opcion a actualizar: ", opciones_update)
         .prompt()
@@ -213,6 +214,9 @@ pub fn actualizar_libro() {
                 .expect("Error al capturar fecha final");
             update_book(&conn, "fecha_final", &fecha_final_update, id)
                 .expect("Error al actualizar libro");
+        }
+        "Volver" => {
+            println!("Volviendo...")
         }
         _ => {
             println!("Opcion no valida.");
